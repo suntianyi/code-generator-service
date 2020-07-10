@@ -1,0 +1,30 @@
+package ${package.Entity};
+
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+#end
+
+import java.io.Serializable;
+
+/**
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${entityLombokModel})
+@Data
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
+#end
+public class ${entity}Query implements Serializable {
+    #if(${entitySerialVersionUID})
+    private static final long serialVersionUID = 1L;
+    #end
+
+    private long current;
+
+    private long size;
+}

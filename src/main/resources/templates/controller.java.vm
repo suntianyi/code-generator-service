@@ -1,0 +1,52 @@
+package ${package.Controller};
+
+import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Query;
+import ${package.Service}.${table.serviceName};
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author ${author}
+ * @since ${date}
+ */
+@Slf4j
+@RestController
+@RequestMapping("/${table.entityPath}")
+public class ${table.controllerName} {
+    private final ${table.serviceName} ${table.entityPath}Service;
+
+    public ${table.controllerName}(${table.serviceName} ${table.entityPath}Service) {
+        this.${table.entityPath}Service = ${table.entityPath}Service;
+    }
+
+    @GetMapping(value = "/page")
+    public Result page(${entity}Query ${table.entityPath}Query) {
+        return Result.success(${table.entityPath}Service.page(${table.entityPath}Query));
+    }
+
+    @GetMapping(value = "/list")
+    public Result list(${entity}Query ${table.entityPath}Query) {
+        return Result.success(${table.entityPath}Service.list(${table.entityPath}Query));
+    }
+
+    @GetMapping(value = "/get")
+    public Result get(String id) {
+        return Result.success(${table.entityPath}Service.get(id));
+    }
+
+    @PostMapping(value = "/insert")
+    public Result insert(${entity} ${table.entityPath}) {
+        return ${table.entityPath}Service.insert(${table.entityPath}) > 0 ? Result.success("添加成功") : Result.fail("添加失败");
+    }
+
+    @PostMapping(value = "/update")
+    public Result update(${entity} ${table.entityPath}) {
+        return ${table.entityPath}Service.update(${table.entityPath}) > 0 ? Result.success("修改成功") : Result.fail("修改失败");
+    }
+
+    @PostMapping(value = "/delete")
+    public Result delete(String id) {
+        return ${table.entityPath}Service.delete(id) > 0 ? Result.success("删除成功") : Result.fail("删除失败");
+    }
+}

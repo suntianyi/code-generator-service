@@ -1,0 +1,26 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Query;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import java.util.List;
+
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.serviceName} {
+    Page<${entity}> page(${entity}Query ${table.entityPath}Query);
+
+    List<${entity}> list(${entity}Query ${table.entityPath}Query);
+
+    ${entity} get(String id);
+
+    int insert(${entity} ${table.entityPath});
+
+    int update(${entity} ${table.entityPath});
+
+    int delete(String id);
+}

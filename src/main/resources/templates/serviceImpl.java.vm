@@ -1,0 +1,65 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Entity}.${entity}Query;
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import java.util.List;
+
+/**
+ * @author ${author}
+ * @since ${date}
+ */
+@Slf4j
+@Service
+public class ${table.serviceImplName} implements ${table.serviceName} {
+    private final ${table.mapperName} ${table.entityPath}Mapper;
+
+    public ${table.serviceImplName}(${table.mapperName} ${table.entityPath}Mapper) {
+        this.${table.entityPath}Mapper = ${table.entityPath}Mapper;
+    }
+
+    @Override
+    public Page<${entity}> page(${entity}Query ${table.entityPath}Query) {
+        QueryWrapper<${entity}> queryWrapper = transform(${table.entityPath}Query);
+        Page<${entity}> page = new Page<>(${table.entityPath}Query.getCurrent(), ${table.entityPath}Query.getSize());
+        return ${table.entityPath}Mapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    public List<${entity}> list(${entity}Query ${table.entityPath}Query) {
+        QueryWrapper<${entity}> queryWrapper = transform(${table.entityPath}Query);
+        return ${table.entityPath}Mapper.selectList(queryWrapper);
+    }
+
+    private QueryWrapper<${entity}> transform (${entity}Query ${table.entityPath}Query) {
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>();
+        return queryWrapper;
+    }
+
+    @Override
+    public ${entity} get(String id) {
+        return ${table.entityPath}Mapper.selectById(id);
+    }
+
+    @Override
+    public int insert(${entity} ${table.entityPath}) {
+        return ${table.entityPath}Mapper.insert(${table.entityPath});
+    }
+
+    @Override
+    public int update(${entity} ${table.entityPath}) {
+        return ${table.entityPath}Mapper.updateById(${table.entityPath});
+    }
+
+    @Override
+    public int delete(String id) {
+        return ${table.entityPath}Mapper.deleteById(id);
+    }
+}
+
