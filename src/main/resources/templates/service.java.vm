@@ -18,9 +18,9 @@ public interface ${table.serviceName} {
 
     ${entity} get(String id);
 
-    int insert(${entity} ${table.entityPath});
+    void insert(${entity} ${table.entityPath});
 
-    int update(${entity} ${table.entityPath});
+    void update(${entity} ${table.entityPath});
 
-    int delete(String id);
+    void delete(String id);
 }

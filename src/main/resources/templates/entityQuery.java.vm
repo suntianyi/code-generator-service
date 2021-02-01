@@ -24,7 +24,7 @@ public class ${entity}Query implements Serializable {
     private static final long serialVersionUID = 1L;
     #end
 
-    private long current;
+    private long pageNo;
 
-    private long size;
+    private long pageSize;
 }

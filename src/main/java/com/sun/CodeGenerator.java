@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
-import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.FileType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -24,7 +23,7 @@ public class CodeGenerator {
     private final static String moduleName = "sun";
     private final static String author = "sun";
 
-    private final static String tables = "canteen_box,canteen_goods,user_address";
+    private final static String tables = "organization";
 
 
     public static void main(String[] args) {
@@ -46,7 +45,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir(outputDir);
         gc.setFileOverride(true);
-//        gc.setBaseResultMap(true);
+        gc.setBaseResultMap(true);
 //        gc.setBaseColumnList(true);
         gc.setServiceName("%sService");
         gc.setAuthor(author);
@@ -58,7 +57,7 @@ public class CodeGenerator {
     // 数据源配置
     public static DataSourceConfig initDateSourceConfig() {
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/wanjia_goods?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/ksports?useUnicode=true&useSSL=false&characterEncoding=utf8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("sun");
         dsc.setPassword("123456");
@@ -75,7 +74,7 @@ public class CodeGenerator {
 
     public static StrategyConfig initStrategyConfig() {
         StrategyConfig strategy = new StrategyConfig();
-        //strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
+        strategy.setTablePrefix("secure_");// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setInclude(tables.split(",")); // 需要生成的表
         strategy.setRestControllerStyle(true); //生成RestController控制器
@@ -90,7 +89,7 @@ public class CodeGenerator {
         tc.setServiceImpl("templates/serviceImpl.java");
         tc.setEntity("templates/entity.java");
         tc.setMapper("templates/mapper.java");
-        tc.setXml(null);
+//        tc.setXml(null);
         return tc;
     }
 

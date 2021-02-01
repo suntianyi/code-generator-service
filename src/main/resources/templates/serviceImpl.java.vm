@@ -27,7 +27,7 @@ public class ${table.serviceImplName} implements ${table.serviceName} {
     @Override
     public Page<${entity}> page(${entity}Query ${table.entityPath}Query) {
         QueryWrapper<${entity}> queryWrapper = transform(${table.entityPath}Query);
-        Page<${entity}> page = new Page<>(${table.entityPath}Query.getCurrent(), ${table.entityPath}Query.getSize());
+        Page<${entity}> page = new Page<>(${table.entityPath}Query.getPageNo(), ${table.entityPath}Query.getPageSize());
         return ${table.entityPath}Mapper.selectPage(page, queryWrapper);
     }
 
@@ -48,18 +48,18 @@ public class ${table.serviceImplName} implements ${table.serviceName} {
     }
 
     @Override
-    public int insert(${entity} ${table.entityPath}) {
-        return ${table.entityPath}Mapper.insert(${table.entityPath});
+    public void insert(${entity} ${table.entityPath}) {
+        ${table.entityPath}Mapper.insert(${table.entityPath});
     }
 
     @Override
-    public int update(${entity} ${table.entityPath}) {
-        return ${table.entityPath}Mapper.updateById(${table.entityPath});
+    public void update(${entity} ${table.entityPath}) {
+        ${table.entityPath}Mapper.updateById(${table.entityPath});
     }
 
     @Override
-    public int delete(String id) {
-        return ${table.entityPath}Mapper.deleteById(id);
+    public void delete(String id) {
+        ${table.entityPath}Mapper.deleteById(id);
     }
 }
 

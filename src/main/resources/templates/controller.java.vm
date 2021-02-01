@@ -21,32 +21,35 @@ public class ${table.controllerName} {
     }
 
     @GetMapping(value = "/page")
-    public Result page(${entity}Query ${table.entityPath}Query) {
-        return Result.success(${table.entityPath}Service.page(${table.entityPath}Query));
+    public Response page(${entity}Query ${table.entityPath}Query) {
+        return Response.data(${table.entityPath}Service.page(${table.entityPath}Query));
     }
 
     @GetMapping(value = "/list")
-    public Result list(${entity}Query ${table.entityPath}Query) {
-        return Result.success(${table.entityPath}Service.list(${table.entityPath}Query));
+    public Response list(${entity}Query ${table.entityPath}Query) {
+        return Response.data(${table.entityPath}Service.list(${table.entityPath}Query));
     }
 
     @GetMapping(value = "/get")
-    public Result get(String id) {
-        return Result.success(${table.entityPath}Service.get(id));
+    public Response get(String id) {
+        return Response.data(${table.entityPath}Service.get(id));
     }
 
     @PostMapping(value = "/insert")
-    public Result insert(${entity} ${table.entityPath}) {
-        return ${table.entityPath}Service.insert(${table.entityPath}) > 0 ? Result.success("添加成功") : Result.fail("添加失败");
+    public Response insert(${entity} ${table.entityPath}) {
+        ${table.entityPath}Service.insert(${table.entityPath});
+        return Response.success("添加成功");
     }
 
     @PostMapping(value = "/update")
-    public Result update(${entity} ${table.entityPath}) {
-        return ${table.entityPath}Service.update(${table.entityPath}) > 0 ? Result.success("修改成功") : Result.fail("修改失败");
+    public Response update(${entity} ${table.entityPath}) {
+        ${table.entityPath}Service.update(${table.entityPath});
+        return Response.success("修改成功");
     }
 
     @PostMapping(value = "/delete")
-    public Result delete(String id) {
-        return ${table.entityPath}Service.delete(id) > 0 ? Result.success("删除成功") : Result.fail("删除失败");
+    public Response delete(String id) {
+        ${table.entityPath}Service.delete(id);
+        return Response.success("删除成功");
     }
 }
