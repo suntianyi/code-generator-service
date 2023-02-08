@@ -26,20 +26,15 @@ public class ${table.serviceImplName} implements ${table.serviceName} {
 
     @Override
     public Page<${entity}> page(${entity}Query ${table.entityPath}Query) {
-        QueryWrapper<${entity}> queryWrapper = transform(${table.entityPath}Query);
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>();
         Page<${entity}> page = new Page<>(${table.entityPath}Query.getPageNo(), ${table.entityPath}Query.getPageSize());
         return ${table.entityPath}Mapper.selectPage(page, queryWrapper);
     }
 
     @Override
     public List<${entity}> list(${entity}Query ${table.entityPath}Query) {
-        QueryWrapper<${entity}> queryWrapper = transform(${table.entityPath}Query);
-        return ${table.entityPath}Mapper.selectList(queryWrapper);
-    }
-
-    private QueryWrapper<${entity}> transform (${entity}Query ${table.entityPath}Query) {
         QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>();
-        return queryWrapper;
+        return ${table.entityPath}Mapper.selectList(queryWrapper);
     }
 
     @Override

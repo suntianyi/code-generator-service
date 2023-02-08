@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModelProperty;
 #end
 #if(${entityLombokModel})
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 #if(${chainModel})
 import lombok.experimental.Accessors;
 #end
@@ -21,11 +20,6 @@ import lombok.experimental.Accessors;
  */
 #if(${entityLombokModel})
 @Data
-  #if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-  #else
-@EqualsAndHashCode(callSuper = false)
-  #end
   #if(${chainModel})
 @Accessors(chain = true)
   #end
@@ -41,11 +35,7 @@ public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #else
-public class ${entity} implements Serializable {
-#end
-
-#if(${entitySerialVersionUID})
-    private static final long serialVersionUID = 1L;
+public class ${entity} {
 #end
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})

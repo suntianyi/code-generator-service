@@ -2,10 +2,7 @@ package ${cfg.Query};
 
 #if(${entityLombokModel})
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 #end
-
-import java.io.Serializable;
 
 /**
  * @author ${author}
@@ -13,16 +10,8 @@ import java.io.Serializable;
  */
 #if(${entityLombokModel})
 @Data
-#if(${superEntityClass})
-@EqualsAndHashCode(callSuper = true)
-#else
-@EqualsAndHashCode(callSuper = false)
 #end
-#end
-public class ${entity}Query implements Serializable {
-    #if(${entitySerialVersionUID})
-    private static final long serialVersionUID = 1L;
-    #end
+public class ${entity}Query {
 
     private long pageNo;
 
