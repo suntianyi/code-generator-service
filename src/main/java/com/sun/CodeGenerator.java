@@ -11,7 +11,9 @@ import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author sunzh
@@ -100,11 +102,11 @@ public class CodeGenerator {
             public void initMap() {
                 // 添加自定义参数，使用格式为cfg.xxx
                 Map<String, Object> map = new HashMap<>();
-                map.put("Query", "com.csg.query");
+                map.put("Query", parent + "." + moduleName + ".query");
                 setMap(map);
             }
         };
-        String templatePath = "/templates/entityQuery.java.vm";
+        String templatePath = "/templates/query.java.vm";
         List<FileOutConfig> focList = new ArrayList<>();
         focList.add(new FileOutConfig(templatePath) {
             @Override

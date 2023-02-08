@@ -1,4 +1,4 @@
-package ${package.Entity};
+package ${cfg.Query};
 
 #if(${entityLombokModel})
 import lombok.Data;
