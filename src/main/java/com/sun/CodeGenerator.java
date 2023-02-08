@@ -74,7 +74,7 @@ public class CodeGenerator {
 
     public static StrategyConfig initStrategyConfig() {
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix("secure_");// 此处可以修改为您的表前缀
+        strategy.setTablePrefix("t_");// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setInclude(tables.split(",")); // 需要生成的表
         strategy.setRestControllerStyle(true); //生成RestController控制器
@@ -97,27 +97,26 @@ public class CodeGenerator {
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
-            public void initMap() {}
+            public void initMap() {
+                // 添加自定义参数，使用格式为cfg.xxx
+                Map<String, Object> map = new HashMap<>();
+                map.put("Query", "com.csg.query");
+                setMap(map);
+            }
         };
-         String templatePath = "/templates/entityQuery.java.vm";
+        String templatePath = "/templates/entityQuery.java.vm";
         List<FileOutConfig> focList = new ArrayList<>();
         focList.add(new FileOutConfig(templatePath) {
             @Override
             public String outputFile(TableInfo tableInfo) {
+                String str = outputDir + parent + "/" + moduleName + "/query/";
+                File file = new File(str);
+                if (!file.exists()) {
+                    file.mkdir();
+                }
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                String path = outputDir + parent + "/" + moduleName + "/entity/" + tableInfo.getEntityName() + "Query" + StringPool.DOT_JAVA;
-                System.out.println(path);
-                return path;
+                return outputDir + parent + "/" + moduleName + "/query/" + tableInfo.getEntityName() + "Query" + StringPool.DOT_JAVA;
             }
-        });
-        cfg.setFileCreate((configBuilder, fileType, filePath) -> {
-            // 判断自定义文件夹是否需要创建
-            if (fileType == FileType.ENTITY) {
-                // 已经生成 mapper 文件判断存在，不想重新生成返回 false
-                return !new File(filePath).exists();
-            }
-            // 允许生成模板文件
-            return true;
         });
         cfg.setFileOutConfigList(focList);
         return cfg;
